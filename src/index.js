@@ -21,7 +21,9 @@ function displayWeather(data) {
   cityElement.innerHTML = data.city;
   temperatureElement.innerHTML = Math.round(data.temperature.current);
   weatherDescriptionElement.innerHTML = `${formatDate(new Date())}, ${data.condition.description} <br />Humidity: <strong>${data.temperature.humidity}%</strong>, Wind: <strong>${data.wind.speed} km/h</strong>`;
-  iconElement.innerHTML = getWeatherIcon(data.condition.icon);
+
+  // Use the API-provided icon URL
+  iconElement.innerHTML = `<img src="${data.condition.icon_url}" alt="${data.condition.description}" />`;
 }
 
 function formatDate(date) {
@@ -51,28 +53,5 @@ function formatDate(date) {
   return `${formattedDay} ${hours}:${minutes}`;
 }
 
-function getWeatherIcon(iconCode) {
-  const iconMapping = {
-    "01d": "☀️",
-    "01n": "🌙", 
-    "02d": "⛅", 
-    "02n": "☁️", 
-    "03d": "☁️",
-    "03n": "☁️", 
-    "04d": "☁️", 
-    "04n": "☁️", 
-    "09d": "🌧️", 
-    "09n": "🌧️", 
-    "10d": "🌦️",
-    "10n": "🌧️", 
-    "11d": "⛈️", 
-    "11n": "⛈️", 
-    "13d": "❄️",
-    "13n": "❄️", 
-    "50d": "🌫️", 
-    "50n": "🌫️"  
-  };
-  return iconMapping[iconCode] || "🌡️";
-}
-  let searchForm = document.querySelector("#search-form");
-  searchForm.addEventListener("submit", search);
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", search);
